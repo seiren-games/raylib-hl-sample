@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../hashlink-extension"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"hashlink-extension": true
+		}
+	}
+}

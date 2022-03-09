@@ -1,0 +1,3 @@
+--library utest
+
+--macro nullSafety("raylib-hl", Strict)

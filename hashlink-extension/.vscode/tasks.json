@@ -1,0 +1,59 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "C/C++: Clean",
+			"command": "haxe --run RunClean"
+		},
+		{
+			"type": "shell",
+			"label": "C/C++: Build debug",
+			"command": "MSBuild.exe",
+			"args": [
+				"-property:Configuration=DEBUG"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"type": "shell",
+			"label": "C/C++: Build release",
+			"command": "MSBuild.exe",
+			"args": [
+				"-property:Configuration=RELEASE"
+			],
+			"problemMatcher": [
+				"$msCompile"
+			],
+		},
+		{
+			"type": "shell",
+			"label": "C/C++: Clean build debug",
+			"command": "echo Successfull.",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"C/C++: Clean",
+				"C/C++: Build debug"
+			],
+		},
+		{
+			"type": "shell",
+			"label": "C/C++: Clean build release",
+			"command": "echo Successfull.",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"C/C++: Clean",
+				"C/C++: Build release"
+			],
+		}
+	]
+}

@@ -1,0 +1,8 @@
+extraParams.hxml
+
+-main TestAll
+-debug
+-cp .\test
+
+--hl bin/main.hl
+--cmd hl bin/main.hl
