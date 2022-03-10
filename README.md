@@ -14,8 +14,8 @@ In windows-os.
 	- [compilerPath](https://github.com/seiren-games/raylib-hl-sample/blob/9a54b821e89da139cdd4c5b3050bac4caa04a5f5/hashlink-extension/.vscode/c_cpp_properties.json#L19)
 1. Run `start-vscode-from-vcvars64.bat`
 1. Build and run: vscode menu - `Terminal` - `Run Build Task...` or Ctrl+Shift+B
-1. Rename the raylib function (identifier) that collided with another function to `Raylib****`.  
-Replace raylib source files(`hashlink-extension/lib/raylib/src`).
+1. Function(identifier) names collide and error occurs.  
+Rename the collided functions in the raylib source files(`hashlink-extension/lib/raylib/src`) to `Raylib****`.  
 Unfortunately, raylib doesn't have a prefix: https://github.com/raysan5/raylib/discussions/2057#discussioncomment-1486752
 1. Repeat 4.~5.
 
