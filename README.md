@@ -9,10 +9,15 @@ Raylib-api is only for running the sample.
 In windows-os.
 
 1. Download [raylib source](https://github.com/raysan5/raylib), and put it in `hashlink-extension/lib`
-1. Run vscode from vcvars64.bat: Double-click `start-vscode-from-vcvars64.bat`
+1. Edit path: Match your visual studio version.
+	- [vcvars64.bat path](https://github.com/seiren-games/raylib-hl-sample/blob/8c5995dc853e1b96e47320aa242e9f726569159c/start-vscode-from-vcvars64.bat#L3)
+	- [compilerPath](https://github.com/seiren-games/raylib-hl-sample/blob/9a54b821e89da139cdd4c5b3050bac4caa04a5f5/hashlink-extension/.vscode/c_cpp_properties.json#L19)
+1. Run `start-vscode-from-vcvars64.bat`
 1. Build and run: vscode menu - `Terminal` - `Run Build Task...` or Ctrl+Shift+B
-1. Rename the raylib function (identifier) that collided with another function to `Raylib****`.
+1. Rename the raylib function (identifier) that collided with another function to `Raylib****`.  
+Replace raylib source files(`hashlink-extension/lib/raylib/src`).
 Unfortunately, raylib doesn't have a prefix: https://github.com/raysan5/raylib/discussions/2057#discussioncomment-1486752
+1. Repeat 4.~5.
 
 ### Thanks
 [HashLink-native-extension-tutorial](https://github.com/HaxeFoundation/hashlink/wiki/HashLink-native-extension-tutorial)
