@@ -20,12 +20,16 @@ class RunSetup {
 	static function main():Void {
 		trace("Run setup.");
 		final tmpDir:String = '${Sys.getEnv("tmp")}/{B435D3AC-8E5A-49DF-BFAB-976AFE917694}';
-		FileSystem.createDirectory(tmpDir);
-		Sys.command('git -C "${tmpDir}" clone https://github.com/raysan5/raylib.git');
+		if (!FileSystem.exists(tmpDir)) {
+			FileSystem.createDirectory(tmpDir);
+			Sys.command('git -C "${tmpDir}" clone https://github.com/raysan5/raylib.git');
+		}
 
-		FileSystem.createDirectory("lib/raylib");
-		//FileSystem.rename("${tmpDir}/raylib/src", "lib/raylib/src");
-		Sys.command('move "${tmpDir}/raylib/src" lib/raylib');
+		if (!FileSystem.exists("lib/raylib")) {
+			FileSystem.createDirectory("lib/raylib");
+			if (false) FileSystem.rename("${tmpDir}/raylib/src", "lib/raylib/src"); // not work
+			Sys.command('xcopy "${tmpDir}/raylib/src" lib/raylib');
+		}
 		
 		addPrefix();
 	}
