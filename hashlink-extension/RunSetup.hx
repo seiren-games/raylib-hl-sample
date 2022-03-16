@@ -17,18 +17,25 @@ typedef Identifier = {
 }
 
 class RunSetup {
+	final tmpDir:String;
 	static function main():Void {
+		new RunSetup();
+	}
+
+	function new() {
 		trace("Run setup.");
-		final tmpDir:String = '${Sys.getEnv("tmp")}/{B435D3AC-8E5A-49DF-BFAB-976AFE917694}';
+		tmpDir = '${Sys.getEnv("tmp")}\\{B435D3AC-8E5A-49DF-BFAB-976AFE917694}';
 		if (!FileSystem.exists(tmpDir)) {
 			FileSystem.createDirectory(tmpDir);
 			Sys.command('git -C "${tmpDir}" clone https://github.com/raysan5/raylib.git');
 		}
 
-		if (!FileSystem.exists("lib/raylib")) {
-			FileSystem.createDirectory("lib/raylib");
-			if (false) FileSystem.rename("${tmpDir}/raylib/src", "lib/raylib/src"); // not work
-			Sys.command('xcopy "${tmpDir}/raylib/src" lib/raylib');
+		final sourceRaylibDir:String = '${tmpDir}\\raylib\\src';
+		final destRaylibDir:String = "lib\\raylib\\src";
+		if (!FileSystem.exists(destRaylibDir)) {
+			FileSystem.createDirectory(destRaylibDir);
+			if (false) FileSystem.rename('${tmpDir}/raylib/src', "lib/raylib/src"); // not work
+			Sys.command('xcopy /s /e /i "${sourceRaylibDir}" ${destRaylibDir}');
 		}
 		
 		addPrefix();
