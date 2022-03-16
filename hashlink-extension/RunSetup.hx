@@ -41,17 +41,26 @@ class RunSetup {
 		addPrefix();
 	}
 
-	static function addPrefix():Void {
+	function addPrefix():Void {
 		final raylibSourceFiles:Array<String> = getDirFiles("lib/raylib").filter(function (file:String):Bool {
 			return ["c", "h"].contains(Path.extension(file));
 		});
-		trace(raylibSourceFiles);
+		//trace(raylibSourceFiles);
 
-		final raylibApi:RaylibApi = Json.parse(File.getContent("lib/raylib/parser/raylib_api.json"));
-		trace(raylibApi);
+		final raylibApi:RaylibApi = Json.parse(File.getContent(tmpDir + "/raylib/parser/raylib_api.json"));
+		
+		for (raylibSourceFile in raylibSourceFiles) {
+			var content:String = File.getContent(raylibSourceFile);
+			for (identifier in raylibApi.structs) {
+				trace(identifier.name, raylibSourceFile);
+				final eReg:EReg = new EReg("\\b" + identifier.name + "\\b", "g");
+				content = eReg.replace(content, "Raylib" + identifier.name);
+			}
+			File.saveContent(raylibSourceFile, content);
+		}
 	}
 
-	static function getDirFiles(dirPath:String = ".\\", ?fileList:Array<String>, recursive:Bool = true):Array<String> {
+	function getDirFiles(dirPath:String = ".\\", ?fileList:Array<String>, recursive:Bool = true):Array<String> {
 		if (fileList == null) {
 			fileList = [];
 		}
