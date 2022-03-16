@@ -43,7 +43,7 @@ class RunSetup {
 
 	static function addPrefix():Void {
 		final raylibSourceFiles:Array<String> = getDirFiles("lib/raylib").filter(function (file:String):Bool {
-			return [".c", ".h"].contains(Path.extension(file));
+			return ["c", "h"].contains(Path.extension(file));
 		});
 		trace(raylibSourceFiles);
 
