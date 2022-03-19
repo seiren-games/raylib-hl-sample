@@ -45,13 +45,16 @@ class RunSetup {
 		final raylibSourceFiles:Array<String> = getDirFiles("lib/raylib").filter(function (file:String):Bool {
 			return ["c", "h"].contains(Path.extension(file));
 		});
-		//trace(raylibSourceFiles);
 
 		final raylibApi:RaylibApi = Json.parse(File.getContent(tmpDir + "/raylib/parser/raylib_api.json"));
 		
+		final identifiers:Array<Identifier> = raylibApi.structs
+			.concat(raylibApi.enums)
+			.concat(raylibApi.defines)
+			.concat(raylibApi.functions);
 		for (raylibSourceFile in raylibSourceFiles) {
 			var content:String = File.getContent(raylibSourceFile);
-			for (identifier in raylibApi.structs) {
+			for (identifier in identifiers) {
 				trace(identifier.name, raylibSourceFile);
 				final eReg:EReg = new EReg("\\b" + identifier.name + "\\b", "g");
 				content = eReg.replace(content, "Raylib" + identifier.name);
