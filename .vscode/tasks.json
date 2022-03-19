@@ -3,6 +3,14 @@
 	"tasks": [
 		{
 			"type": "shell",
+			"label": "C/C++: Setup raylib source",
+			"command": "haxe --run RunSetup",
+			"options": {
+				"cwd": "${workspaceFolder}/hashlink-extension"
+			}
+		},
+		{
+			"type": "shell",
 			"label": "C/C++: Build debug",
 			"command": "MSBuild.exe",
 			"args": [
