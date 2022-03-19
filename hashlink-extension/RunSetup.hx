@@ -53,9 +53,9 @@ class RunSetup {
 			.concat(raylibApi.defines)
 			.concat(raylibApi.functions);
 		for (raylibSourceFile in raylibSourceFiles) {
+			trace("Replace: " + raylibSourceFile);
 			var content:String = File.getContent(raylibSourceFile);
 			for (identifier in identifiers) {
-				trace(identifier.name, raylibSourceFile);
 				final eReg:EReg = new EReg("\\b" + identifier.name + "\\b", "g");
 				content = eReg.replace(content, "Raylib" + identifier.name);
 			}
