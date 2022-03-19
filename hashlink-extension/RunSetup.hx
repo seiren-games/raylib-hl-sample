@@ -5,6 +5,13 @@ import haxe.Json;
 import haxe.io.Path;
 import sys.FileSystem;
 
+typedef RaylibApi = {
+	structs:Array<Identifier>,
+	enums:Array<Identifier>,
+	defines:Array<Identifier>,
+	functions:Array<Identifier>
+}
+
 typedef Identifier = {
 	name:String
 }
@@ -39,16 +46,12 @@ class RunSetup {
 			return ["c", "h"].contains(Path.extension(file));
 		});
 
-		final raylibApi:Any = Json.parse(File.getContent(tmpDir + "/raylib/parser/raylib_api.json"));
+		final raylibApi:RaylibApi = Json.parse(File.getContent(tmpDir + "/raylib/parser/raylib_api.json"));
 		
-		final identifiers:Array<Identifier> = [
-			for (field in Reflect.fields(raylibApi)) {
-				final identifiers:Array<Identifier> = Reflect.getProperty(raylibApi, field);
-				for (identifier in identifiers) {
-					identifier;
-				}
-			}
-		];
+		final identifiers:Array<Identifier> = raylibApi.structs
+			.concat(raylibApi.enums)
+			.concat(raylibApi.defines)
+			.concat(raylibApi.functions);
 		for (raylibSourceFile in raylibSourceFiles) {
 			trace("Replace: " + raylibSourceFile);
 			var content:String = File.getContent(raylibSourceFile);
