@@ -1,4 +1,5 @@
-extraParams.hxml
+--library utest
+--macro nullSafety("raylib", Strict)
 
 -main TestAll
 -debug
