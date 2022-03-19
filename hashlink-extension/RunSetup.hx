@@ -34,11 +34,12 @@ class RunSetup {
 		final destRaylibDir:String = "lib\\raylib\\src";
 		if (!FileSystem.exists(destRaylibDir)) {
 			FileSystem.createDirectory(destRaylibDir);
-			if (false) FileSystem.rename('${tmpDir}/raylib/src', "lib/raylib/src"); // not work
+			if (false) FileSystem.rename(sourceRaylibDir, destRaylibDir); // not work
 			Sys.command('xcopy /s /e /i "${sourceRaylibDir}" ${destRaylibDir}');
+			addPrefix();
 		}
-		
-		addPrefix();
+
+		trace("Finished.");
 	}
 
 	function addPrefix():Void {
